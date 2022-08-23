@@ -29,7 +29,8 @@ function App() {
         token: _token
       })
 
-      
+      //spotify.getMyTopArtists
+      //spotify.getMyTopTracks
       //spotify.(data => {console.log(data)}, (err) => console.log(err));
 
       // add the token to the spotify api for access to scopes

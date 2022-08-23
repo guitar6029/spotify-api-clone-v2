@@ -6,6 +6,7 @@ import uuid from 'react-uuid'
 import TrackItem from '../TrackItem/TrackItem';
 import RecentlyPlayed from '../RecentlyPlayed/RecentlyPlayed';
 import Greeting from '../Greeting/Greeting';
+import FavoriteArtists from '../FavoriteArtists/FavoriteArtists';
 
 function Main({ spotify }) {
 
@@ -45,6 +46,7 @@ function Main({ spotify }) {
       <TopMenu spotify={spotify} />
       <Greeting />
       <RecentlyPlayed recentlyPlayed={recentlyPlayed} />
+      <FavoriteArtists spotify={spotify} />
     </div>
   )
 }
