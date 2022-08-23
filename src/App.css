@@ -8,6 +8,7 @@ body{
     --spotify-text-color: #b4aeae;
     --spotify-playlist-item-background-color: #171616; 
     --spotify-button-color : #38cb55;
+    --spotify-button-color-hover : #61e97d;
     --main-background-color :  #1a1a1a;
     font-family: 'Roboto', sans-serif;
     height: 100vh;

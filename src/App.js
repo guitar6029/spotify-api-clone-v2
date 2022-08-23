@@ -29,6 +29,9 @@ function App() {
         token: _token
       })
 
+      
+      //spotify.(data => {console.log(data)}, (err) => console.log(err));
+
       // add the token to the spotify api for access to scopes
       spotify.setAccessToken(_token);
 
@@ -42,6 +45,7 @@ function App() {
         });
 
       });
+
 
       spotify.getUserPlaylists().then((playlists) => {
 

@@ -1,11 +1,12 @@
 import './TrackItem.css';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 
 function TrackItem({album,images}) {
   return (
     <div className='trackItem__container'>
-        <div><img src={images[2].url} alt={album}/></div>
-        <div>{album}</div>
-
+        <img src={images[2].url} alt={album}/>
+        <h4>{album}</h4>
+        <PlayCircleFilledIcon />
     </div>
   )
 }

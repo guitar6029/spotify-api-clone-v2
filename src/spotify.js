@@ -32,7 +32,8 @@ const spotifyScopes = [
     "user-library-read",
     "user-read-currently-playing",
     "user-read-recently-played",
-    "user-modify-playback-state"
+    "user-modify-playback-state",
+    
 ];
 
 export const tokenResponseUrl = () => {
