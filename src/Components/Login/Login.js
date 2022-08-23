@@ -1,5 +1,5 @@
 import React from 'react';
-import SpotifyLogo from './Spotify_Logo_RGB_Green.png';
+import SpotifyLogo from '../../Spotify_Logo_RGB_Green.png';
 import {loginUrl} from '../../spotify';
 import './Login.css';
 

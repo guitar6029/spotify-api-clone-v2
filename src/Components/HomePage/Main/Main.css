@@ -1,0 +1,4 @@
+.main__content {
+    flex: 1;
+    background: linear-gradient(rgb(20, 20, 20), rgb(34, 35, 33));
+}

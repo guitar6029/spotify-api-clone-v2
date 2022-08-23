@@ -1,3 +1,6 @@
 .home{
+    display: flex;
+    direction: row;
     color: var(--spotify-color);
+    
 }

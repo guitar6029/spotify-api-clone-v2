@@ -1,0 +1,110 @@
+.green {
+    color: var(--spotify-button-color) !important;
+}
+
+.green:hover {
+    color: var(--spotify-button-color) !important;
+}
+
+
+.liked__item {
+    color: var(--spotify-button-color) !important;
+}
+
+.playerBar {
+    position: fixed;
+    bottom: 0;
+    background: #1e1d1d;
+    width: 100%;
+    height: 80px;
+    color: var(--spotify-text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.playerBar__controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    color: var(--spotify-text-color);
+}
+
+.playerBar__controls>.MuiSvgIcon-root {
+    font-size: 25px;
+}
+
+.playerBar__controls>.MuiSvgIcon-root:nth-child(3) {
+    font-size: 45px !important;
+
+}
+
+.playerBar__controls>.MuiSvgIcon-root:hover {
+   
+    color: var(--spotify-color);
+    cursor: pointer;
+}
+
+.playerBar__description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+.playerBar__description:nth-child(1) > div > img{
+    width: 50px;
+    object-fit: cover;
+}
+
+.playerBar__description__audio__description {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.playerBar__description__audio__description>span:nth-child(1) {
+    font-size: 15px;
+    color: var(--spotify-color);
+}
+
+.playerBar__description__audio__description>span:nth-child(1):hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.playerBar__description__audio__description>span:nth-child(2) {
+    font-size: 10px;
+
+}
+
+.playerBar__description__audio__description>span:nth-child(2):hover {
+    text-decoration: underline;
+    color: var(--spotify-color);
+    cursor: pointer;
+}
+
+.playerBar__description>div>.MuiSvgIcon-root {
+
+    color: var(--spotify-text-color);
+    cursor: pointer;
+}
+
+
+.playerBar__description>div>.MuiSvgIcon-root:hover {
+
+    color: var(--spotify-color);
+    cursor: pointer;
+}
+
+
+.playerBar__otherOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-right: 15px;
+}
