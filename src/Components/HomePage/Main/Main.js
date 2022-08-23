@@ -1,35 +1,51 @@
-import {useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import './Main.css';
-import {User} from '../../../Context/UserContext';
+import { User } from '../../../Context/UserContext';
 import TopMenu from './TopMenu/TopMenu';
+import uuid from 'react-uuid'
+import TrackItem from '../TrackItem/TrackItem';
+import RecentlyPlayed from '../RecentlyPlayed/RecentlyPlayed';
+import Greeting from '../Greeting/Greeting';
 
-function Main({spotify}) {
+function Main({ spotify }) {
 
-  const [{user}] = User();
+  const [{ user }] = User();
+  const [errMessage, setErrMessage] = useState(null);
+  const [recentlyPlayed, setRecentlyPlayed] = useState([]);
 
+  useEffect(() => {
 
-  useEffect(()=>{
-    spotify.getMyRecentlyPlayedTracks().then(data => {
-      console.log('recent data');
+    const recentlyPlayed = () => {
+      spotify.getMyRecentlyPlayedTracks().then(data => {
 
-      //let {track} = data;
-      //console.log(track.played_at);
-      let myarray = data.items.map(x => x.track);
-      
-      
-    }, (err) => {
-      console.log(err);
-    })
+        let recentlyPlayedAPI = data.items.map(item => {
+          return {
+            artist: item.track.artists[0].name,
+            album: item.track.album.name,
+            images: item.track.album.images
+          }
+        });
+
+        console.log(recentlyPlayedAPI);
+        setRecentlyPlayed(recentlyPlayedAPI);
+
+      }, (err) => {
+        console.log(err);
+      })
+    }
+
+    recentlyPlayed();
+
   }, [])
 
 
 
-  console.log(user);
   return (
     <div className='main__content'>
-      <TopMenu spotify={spotify}/>
-     
-      </div>
+      <TopMenu spotify={spotify} />
+      <Greeting />
+      <RecentlyPlayed recentlyPlayed={recentlyPlayed} />
+    </div>
   )
 }
 

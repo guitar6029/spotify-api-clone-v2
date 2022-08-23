@@ -11,7 +11,7 @@ function HomePage({spotify}) {
         <Sidebar/>
         <Main spotify={spotify}/>
     </div>
-    <PlayerBar/>
+    <PlayerBar spotify={spotify}/>
     </>
   )
 }

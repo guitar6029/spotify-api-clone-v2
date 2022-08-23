@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './PlayerBar.css';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -14,12 +14,49 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 
-function PlayerBar() {
+function PlayerBar({spotify}) {
 
     const [likedItem, toggleLikedItem] = useState(false);
     const [onPause, togglePausePlay] = useState(false);
     const [onShuffle, toggleShuffle] = useState(false);
     const [onRepeat, toggleRepeat] = useState(false);
+    const [currentTrack, setCurrentTrackInfo] = useState([]);
+    const [currentPodcast, setCurrentPodcastInfo] = useState([]);
+
+    //display current playing track
+    useEffect(()=>{
+        const displayCurrentTrack = () => {
+            spotify.getMyCurrentPlayingTrack().then(data => {
+                console.log(data);
+                //if podcast is playing, the item will be null
+                if( data.item === null){
+                    console.log('no info : null');
+                    let _currentTrack = {
+                        artist: null,
+                        album: null,
+                        images: null
+                    }
+                    setCurrentPodcastInfo(_currentTrack);
+                }
+                //if track is currently playing, get the track's info 
+                else{
+                    let _currentTrack = {
+                    artist: data.item.artists[0].name,
+                    album: data.item.album.name,
+                    trackName : data.item.name,
+                    image: data.item.album.images[2].url
+                }
+
+                console.log(_currentTrack);                
+                setCurrentTrackInfo(_currentTrack);
+                }
+                console.log(data);
+                
+                
+            }, (err) => { console.log(err)});
+        }
+        displayCurrentTrack();
+    },[])
 
     //toggles the heart icon , like or unlike, toggles between two icons
     const handleLikeClick = () => {
@@ -28,7 +65,15 @@ function PlayerBar() {
 
     //toggles the play and pause icons
     const handlePausePlay = () => {
-        togglePausePlay(previousState => !previousState);
+        //if onPaude is false, then play track, otherwise, pause
+        if(onPause){
+            spotify.pause();
+            togglePausePlay(previousState => !previousState);
+        }
+        else{
+            spotify.play();
+            togglePausePlay(previousState => !previousState);
+        }
     }
 
     //toggles between shuffle option
@@ -41,12 +86,14 @@ function PlayerBar() {
         toggleRepeat(previousState => !previousState);
     }
 
+    console.log(currentTrack);
+
     return (
         <div className='playerBar'>
             <div className='playerBar__description'>
-                <div><img src="https://upload.wikimedia.org/wikipedia/en/d/de/Directions-big.jpg" alt="audio-album"/></div>
+                <div><img src={currentTrack.image} alt="audio-album"/></div>
                 <div className='playerBar__description__audio__description'>
-                    <span>song</span><span>artist</span></div>
+                    <span>{currentTrack.trackName}</span><span>{currentTrack.artist}</span></div>
                 { (likedItem) ? <div><FavoriteIcon className='liked__item' onClick={handleLikeClick}/></div> : <div><FavoriteBorderIcon onClick={handleLikeClick}/></div>}
             </div>
 
