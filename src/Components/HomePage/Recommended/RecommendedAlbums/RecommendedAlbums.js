@@ -1,6 +1,11 @@
-'./RecommendedAlbums.css';
+import { useEffect, useState } from "react";
+import './RecommendedAlbums.css';
 
-function RecommendedAlbums() {
+function RecommendedAlbums({title, spotify, similarTo}) {
+
+  
+
+
   return (
     <div>RecommendedAlbums</div>
   )

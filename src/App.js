@@ -23,12 +23,14 @@ function App() {
     //if there is a token , set it to setToken 
     if (_token) {
 
+
       dispatch({
         type: 'SET_TOKEN',
         //remove after devstate
         token: _token
       })
 
+      
       //spotify.getMyTopArtists
       //spotify.getMyTopTracks
       //spotify.(data => {console.log(data)}, (err) => console.log(err));

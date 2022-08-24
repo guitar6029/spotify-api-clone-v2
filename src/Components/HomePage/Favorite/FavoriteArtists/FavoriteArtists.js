@@ -12,13 +12,14 @@ function FavoriteArtists({ spotify }) {
         const getFavoriteArtists = () => {
 
             spotify.getMyTopArtists().then(data => {
+                
                 let _favoriteArtists = data.items.map(item => {
                     return {
                         artist: item.name,
                         image: item.images[1].url
                     }
                 });
-                    console.log(_favoriteArtists);
+                    //console.log(_favoriteArtists);
                 _favoriteArtists = _favoriteArtists.slice(0, 6);
                 //console.log(_favoriteArtists);
                 setFavoriteArtists(_favoriteArtists);
