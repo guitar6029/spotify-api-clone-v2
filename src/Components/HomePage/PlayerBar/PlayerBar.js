@@ -29,15 +29,15 @@ function PlayerBar({ spotify }) {
             spotify.getMyCurrentPlayingTrack().then(data => {
                 // checks if currently playing
                 //console.log(data.is_playing);
-                if (data.is_playing) {
+                if (data?.is_playing) {
                     togglePausePlay(true)//change the play icon to pause
                 }
 
-                if (!data.is_playing) {
+                if (!data?.is_playing) {
                     togglePausePlay(false)
                 }
                 //if podcast is playing, the item will be null
-                if (data.item === null) {
+                if (data?.item === null) {
                     //console.log('no info : null');
                     let _currentTrack = {
                         artist: null,

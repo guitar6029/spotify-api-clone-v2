@@ -20,27 +20,18 @@ function App() {
     window.location.hash = '';
     const _token = hash.access_token;
 
-    //if there is a token , set it to setToken 
     if (_token) {
 
 
       dispatch({
         type: 'SET_TOKEN',
-        //remove after devstate
         token: _token
       })
-
-      
-      //spotify.getMyTopArtists
-      //spotify.getMyTopTracks
-      //spotify.(data => {console.log(data)}, (err) => console.log(err));
 
       // add the token to the spotify api for access to scopes
       spotify.setAccessToken(_token);
 
       spotify.getMe().then(user => {
-        //let _displayName = user.display_name;
-        //setuserName(_displayName);
 
         dispatch({
           type: 'SET_USER',
@@ -49,7 +40,7 @@ function App() {
 
       });
 
-
+      // get and set user's playlists
       spotify.getUserPlaylists().then((playlists) => {
 
         dispatch({
@@ -58,6 +49,29 @@ function App() {
         })
 
       });
+
+        // user's top artists (favorite)
+      spotify.getMyTopArtists().then(data => {
+
+        const favoriteArtists = data.items.map(item => {
+          return {
+            artistID: item.id,
+            artist: item.name,
+            images: item.images
+  
+          }
+        })
+        
+        dispatch({
+          type: 'SET_FAVORITE_ARTISTS',
+          favoriteArtists : favoriteArtists 
+        })
+               
+      }, (err) => {
+        console.log(err.message);
+      })
+
+      
 
     }
   }, [])

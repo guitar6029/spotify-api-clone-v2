@@ -2,6 +2,7 @@ export const initialState = {
     user: null,
     token: null,
     playlists: [],
+    favoriteArtists: [],
     playing: false,
     item: null
 }
@@ -24,6 +25,11 @@ const reducer = (state, action) => {
                 ...state,
                 playlists: action.playlists
             }
+        case 'SET_FAVORITE_ARTISTS':
+            return {
+                ...state,
+                favoriteArtists : action.favoriteArtists
+            }    
         default:
             return state;
     }

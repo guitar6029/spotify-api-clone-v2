@@ -2,20 +2,11 @@ import { useState, useEffect } from 'react';
 import './TopMenu.css';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {User} from '../../../../Context/UserContext';
 
-function TopMenu({ spotify }) {
+function TopMenu({ spotify}) {
 
-    const [user, displayUsername] = useState(null);
-
-    //get username
-    useEffect(() => {
-        const getDisplayName = () => {
-            spotify.getMe().then(data => { displayUsername(data.display_name) }, (err) => { console.log(err) });
-        }
-
-        getDisplayName();
-    }, []);
-
+    const [{user}, dispatch] = User();
 
     const [inputSearchValue, setInputSearchValue] = useState(null);
 
@@ -42,7 +33,7 @@ function TopMenu({ spotify }) {
 
             <div className='avatar'>
                 <AccountCircleIcon />
-                <h5>{user}</h5>
+                <h5>{user?.display_name }</h5>
             </div>
         </div>
     )
