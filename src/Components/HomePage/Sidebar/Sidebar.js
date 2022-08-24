@@ -7,7 +7,7 @@ import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { User } from '../../../Context/UserContext';
-
+import uuid from 'react-uuid';
 
 function Sidebar() {
 
@@ -27,7 +27,7 @@ function Sidebar() {
 
         {playlists?.items?.map( (playlist) => (
           
-            <SidebarOption text={playlist.name} />
+            <SidebarOption key={uuid()} text={playlist.name} />
         ))}
         
 

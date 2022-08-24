@@ -12,7 +12,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled'; import Tooltip from '@mui/material/Tooltip';
+import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 
 function PlayerBar({ spotify }) {
 
@@ -65,13 +65,12 @@ function PlayerBar({ spotify }) {
             }, (err) => { console.log(err) });
         }
         displayCurrentTrack();
-    })
+    }, [])
 
     //toggles the heart icon , like or unlike, toggles between two icons
     const handleLikeClick = () => {
         toggleLikedItem(previousState => !previousState);
     }
-
 
     //skipToNext
     const handleToNext = () => {
@@ -82,8 +81,6 @@ function PlayerBar({ spotify }) {
     const handleToPrevious = () => {
         spotify.skipToPrevious();
     }
-
-
 
     //toggles the play and pause icons
     const handlePausePlay = () => {
@@ -110,8 +107,6 @@ function PlayerBar({ spotify }) {
         toggleRepeat(previousState => !previousState);
     }
 
-    console.log(currentTrack);
-
     return (
         <div className='playerBar'>
             <div className='playerBar__description'>
@@ -123,16 +118,16 @@ function PlayerBar({ spotify }) {
 
             <div className='playerBar__controls'>
 
-                { (onShuffle) ? <ShuffleIcon dataText="Shuffle" className="green" onClick={handleShuffle} /> :
-                    <ShuffleIcon dataText="Shuffle" onClick={handleShuffle} />}
+                {(onShuffle) ? <ShuffleIcon className="green" onClick={handleShuffle} /> :
+                    <ShuffleIcon onClick={handleShuffle} />}
 
                 <SkipPreviousIcon onClick={handleToPrevious} />
 
-                { (onPause) ? <PauseCircleFilledIcon className="green" onClick={handlePausePlay} /> : <PlayCircleFilledIcon onClick={handlePausePlay} />}
-                
+                {(onPause) ? <PauseCircleFilledIcon className="green" onClick={handlePausePlay} /> : <PlayCircleFilledIcon onClick={handlePausePlay} />}
+
                 <SkipNextIcon onClick={handleToNext} />
 
-                { (onRepeat) ? <RepeatIcon className='green' onClick={handleRepeat} /> : <RepeatIcon onClick={handleRepeat} />}
+                {(onRepeat) ? <RepeatIcon className='green' onClick={handleRepeat} /> : <RepeatIcon onClick={handleRepeat} />}
             </div>
 
             <div className='playerBar__otherOptions'>

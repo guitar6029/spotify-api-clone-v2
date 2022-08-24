@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import './Main.css';
 import { User } from '../../../Context/UserContext';
 import TopMenu from './TopMenu/TopMenu';
-import uuid from 'react-uuid'
-import TrackItem from '../TrackItem/TrackItem';
 import RecentlyPlayed from '../RecentlyPlayed/RecentlyPlayed';
 import Greeting from '../Greeting/Greeting';
-import FavoriteArtists from '../FavoriteArtists/FavoriteArtists';
+import FavoriteArtists from '../Favorite/FavoriteArtists/FavoriteArtists';
+import './Main.css';
 
 function Main({ spotify }) {
 
@@ -27,7 +25,7 @@ function Main({ spotify }) {
           }
         });
 
-        console.log(recentlyPlayedAPI);
+        //console.log(recentlyPlayedAPI);
         setRecentlyPlayed(recentlyPlayedAPI);
 
       }, (err) => {
@@ -47,6 +45,8 @@ function Main({ spotify }) {
       <Greeting />
       <RecentlyPlayed recentlyPlayed={recentlyPlayed} />
       <FavoriteArtists spotify={spotify} />
+      
+      
     </div>
   )
 }

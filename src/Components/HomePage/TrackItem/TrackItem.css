@@ -5,14 +5,14 @@
     border-radius: 10px;
     align-items: center;
     width: 400px;
-    background-color: #1a1b1a;
+    background-color: var(--spotify-background-item);
     margin: 10px;
     cursor: pointer;
 
 }
 
 .trackItem__container:hover {
-    background-color: #2f2f32;
+    background-color: var(--spotify-background-item-hover);
 }
 
 .trackItem__container>img {

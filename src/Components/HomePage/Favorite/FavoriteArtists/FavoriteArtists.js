@@ -18,6 +18,8 @@ function FavoriteArtists({ spotify }) {
                         image: item.images[1].url
                     }
                 });
+                    console.log(_favoriteArtists);
+                _favoriteArtists = _favoriteArtists.slice(0, 6);
                 //console.log(_favoriteArtists);
                 setFavoriteArtists(_favoriteArtists);
             }, (err) => {
@@ -33,16 +35,18 @@ function FavoriteArtists({ spotify }) {
     }, [])
 
     return (
-        <div className='favoriteArtists__container'>
-            <h4>FavoriteArtists</h4>
-            {favoriteArtists.map( (artist) => {
+
+        <div className='section__flex__direction__column'>
+            <div className='section__title'><h4>Favorite Artists</h4></div>
+            <div className='section__flex__direction__row'>{favoriteArtists.map((artist) => {
                 return (
-                    <div key={uuid()} className="favoriteArtist__container">
-                            <img src={artist.image}  alt={artist.name}/>
-                            <h5>{artist.name}</h5>
+                    <div key={uuid()} className="section__card background__effect__on__hover section__card__height__sm flex__alignItems__center text__center">
+                        <img className='margin__bottom' src={artist.image} alt={artist.artist} />
+                        <h5 className='textOverflow'>{artist.artist}</h5>
                     </div>
                 )
-            }  )}
+            })}
+            </div>
         </div>
     )
 }

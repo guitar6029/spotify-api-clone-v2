@@ -2,3 +2,11 @@
     flex: 1;
     background: linear-gradient(rgb(20, 20, 20), rgb(34, 35, 33));
 }
+
+.sectionTitle {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: 500;
+
+}
