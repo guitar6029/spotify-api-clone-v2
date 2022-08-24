@@ -29,7 +29,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 favoriteArtists : action.favoriteArtists
-            }    
+            }
+        case 'SET_RANDOM_ARTIST_FOR_SIMILAR_RECOMMENDATION':
+            return {
+                ...state,
+                randomArtist : action.randomArtist
+            }        
         default:
             return state;
     }

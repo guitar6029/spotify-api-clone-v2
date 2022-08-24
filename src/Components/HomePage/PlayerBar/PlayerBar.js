@@ -23,7 +23,8 @@ function PlayerBar({ spotify }) {
     const [currentTrack, setCurrentTrackInfo] = useState([]);
     const [currentPodcast, setCurrentPodcastInfo] = useState([]);
 
-    //display current playing track
+    /***
+     * //display current playing track
     useEffect(() => {
         const displayCurrentTrack = () => {
             spotify.getMyCurrentPlayingTrack().then(data => {
@@ -66,6 +67,8 @@ function PlayerBar({ spotify }) {
         }
         displayCurrentTrack();
     }, [])
+     * 
+     */
 
     //toggles the heart icon , like or unlike, toggles between two icons
     const handleLikeClick = () => {

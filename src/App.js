@@ -61,7 +61,15 @@ function App() {
   
           }
         })
-        
+
+        const randomNum = Math.floor(Math.random() * favoriteArtists.length);
+        const randomArtist = favoriteArtists[randomNum];
+        dispatch({
+          type: 'SET_RANDOM_ARTIST_FOR_SIMILAR_RECOMMENDATION',
+          randomArtist : randomArtist
+        })
+
+
         dispatch({
           type: 'SET_FAVORITE_ARTISTS',
           favoriteArtists : favoriteArtists 

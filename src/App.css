@@ -28,18 +28,18 @@ body {
     margin-bottom: 15px;
 }
 
-/* for items image */
-.section__card>img {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 130px;
-}
-
 /* for each item, artist, album, playlist -- background */
 .section__card {
     width: 160px;
     background-color: var(--spotify-background-item);
     border-radius: 10px;
+    cursor: pointer;
+}
+/* for items image */
+.section__card>img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 130px;
 }
 /* sections card height sm , md, lg, xl */
 .section__card__height__sm {
