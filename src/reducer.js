@@ -4,7 +4,8 @@ export const initialState = {
     playlists: [],
     favoriteArtists: [],
     playing: false,
-    item: null
+    item: null,
+    searchInput : null
 }
 
 const reducer = (state, action) => {

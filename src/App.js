@@ -26,7 +26,7 @@ function App() {
 
     if (_token) {
 
-
+        
       dispatch({
         type: 'SET_TOKEN',
         token: _token

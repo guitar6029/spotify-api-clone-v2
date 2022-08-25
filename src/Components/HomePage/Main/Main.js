@@ -1,4 +1,4 @@
-import TopMenu from './TopMenu/TopMenu';
+import TopMenu from '../../TopMenu/TopMenu';
 import RecentlyPlayed from '../RecentlyPlayed/RecentlyPlayed';
 import Greeting from '../Greeting/Greeting';
 import FavoriteArtists from '../Favorite/FavoriteArtists/FavoriteArtists';
