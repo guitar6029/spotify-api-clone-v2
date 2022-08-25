@@ -34,7 +34,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 randomArtist : action.randomArtist
-            }        
+            }
+        case 'SET_SEARCH_INPUT':
+            return {
+                ...state,
+                searchInput : action.searchInput
+            }            
         default:
             return state;
     }

@@ -5,6 +5,10 @@ import { tokenResponseUrl } from './spotify';
 import SpotifyWebApi from 'spotify-web-api-js';
 import HomePage from './Components/HomePage/HomePage';
 import { User } from './Context/UserContext';
+import {Routes, Route} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import RedirectToHomePage from './RedirectToHomePage'; 
+import SearchPage from './Components/HomePage/SearchPage/SearchPage';
 
 // creates an instance of 
 // spotify api for easier access to scopes
@@ -13,7 +17,7 @@ const spotify = new SpotifyWebApi();
 function App() {
 
   const [{ user, token }, dispatch] = User();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hash = tokenResponseUrl();
@@ -61,6 +65,7 @@ function App() {
   
           }
         })
+        
 
         const randomNum = Math.floor(Math.random() * favoriteArtists.length);
         const randomArtist = favoriteArtists[randomNum];
@@ -83,14 +88,22 @@ function App() {
 
     }
   }, [])
-
+  
+  
 
   return (
-    <div>
-      {(token) ? <HomePage spotify={spotify} /> : <Login />}
-
-    </div>
-  );
+    
+    <>
+    {(token) ? <Routes>
+     
+      <Route path="/home" element={<HomePage spotify={spotify}/>} />
+      <Route path="/callback" element={<RedirectToHomePage />} />
+      <Route path='/search' element={<SearchPage spotify={spotify} />} />
+      <Route path="*" element={<div>404 </div>} />
+    </Routes> : <Login/>}
+    
+    </>
+  )
 }
 
 export default App;
