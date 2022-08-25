@@ -34,7 +34,7 @@ function App() {
 
       // add the token to the spotify api for access to scopes
       spotify.setAccessToken(_token);
-
+        
       spotify.getMe().then(user => {
 
         dispatch({

@@ -1,11 +1,12 @@
 import TopMenu from '../../../TopMenu/TopMenu';
 import {User} from '../../../../Context/UserContext';
 import './SearchedItem.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function SearchedItem({spotify}) {
 
     const [{searchInput}] = User();
+    const [topResult, setTopResult] = useState({});
 
     useEffect(()=>{
         spotify.searchTracks(`${searchInput}`).then(data => {
@@ -18,7 +19,9 @@ function SearchedItem({spotify}) {
                     albumImages : item.album.images
                 }
             })
-            console.log(_data);
+            
+            setTopResult(_data[0]);
+            console.log(_data[0]);
             //console.log(data.tracks.items);
         }, (err) => {
             console.log(err)
@@ -26,6 +29,10 @@ function SearchedItem({spotify}) {
 
     }, [searchInput, spotify])
 
+
+    //console.log("top result");
+    console.log(topResult.artistID);
+    console.log(topResult.albumName);
 
 
   return (
@@ -39,6 +46,7 @@ function SearchedItem({spotify}) {
         </div>
         <div>
             <h3>Top Result</h3>
+            { (topResult) && <div>{topResult.artist}</div>}
         </div>
         </div>
   )
