@@ -1,55 +1,74 @@
 import TopMenu from '../../../TopMenu/TopMenu';
-import {User} from '../../../../Context/UserContext';
-import './SearchedItem.css';
+import { User } from '../../../../Context/UserContext';
 import { useEffect, useState } from 'react';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import './SearchedItem.css';
 
-function SearchedItem({spotify}) {
+function SearchedItem({ spotify }) {
 
-    const [{searchInput}] = User();
+    const [{ searchInput }] = User();
     const [topResult, setTopResult] = useState({});
+    const [artistID, setArtistIDForTopTracks] =useState('');
 
-    useEffect(()=>{
-        spotify.searchTracks(`${searchInput}`).then(data => {
-          
-            let _data = data.tracks.items.map(item => {
-                return {
-                    artistID : item.artists[0].id, 
-                    artist : item.artists[0].name,
-                    albumName : item.album.name,
-                    albumImages : item.album.images
-                }
-            })
-            
-            setTopResult(_data[0]);
-            console.log(_data[0]);
-            //console.log(data.tracks.items);
-        }, (err) => {
-            console.log(err)
-        } );
+    useEffect(() => {
 
+       spotify.searchTracks(`'artist:"${artistID}"'`).then( data => {console.log(data)}, (err) => {console.log(err)});
+       
+         //top result for artist
+        spotify.searchArtists(`'${searchInput}'`).then(data => {
+            console.log(data.artists.items[0]);
+            let _data = {
+                artistId: data.artists.items[0].id,
+                artistName: data.artists.items[0].name,
+                type: data.artists.items[0].type,
+                genres: data.artists.items[0].genres,
+                image: data.artists.items[0].images[1].url
+            }
+
+            _data.type = _data.type.toUpperCase();
+            console.log(_data.artistID);
+            setArtistIDForTopTracks(_data.artistId);
+            console.log(_data);
+            setTopResult(_data);
+        }, (err) => { console.log(err) });
+
+         
     }, [searchInput, spotify])
 
-
-    //console.log("top result");
-    console.log(topResult.artistID);
-    console.log(topResult.albumName);
-
-
-  return (
-    <div className='main__content'>
-        <TopMenu spotify={spotify} />
-        <div className='search__type'>
-            <div className='search__type__item background__effect__on__hover'><h2>All</h2></div>
-            <div className='search__type__item background__effect__on__hover'><h2>Artist</h2></div>
-            <div className='search__type__item background__effect__on__hover'><h2>Albums</h2></div>
-            <div className='search__type__item background__effect__on__hover'><h2>Songs</h2></div>
+    return (
+        <div className='main__content'>
+            <TopMenu spotify={spotify} />
+            <div className='search__type'>
+                <div className='search__type__item background__effect__on__hover selected'><h2>All</h2></div>
+                <div className='search__type__item background__effect__on__hover'><h2>Artist</h2></div>
+                <div className='search__type__item background__effect__on__hover'><h2>Albums</h2></div>
+                <div className='search__type__item background__effect__on__hover'><h2>Songs</h2></div>
+            </div>
+            <div className='searchResults'>
+             <div className='searchResults__top'>
+                <div>
+                    <h3>Top Result</h3>
+                </div>
+                <div>
+                    <h3>Songs</h3>
+                </div>
+            </div>
+                {(topResult) && 
+                <div className='top__result'>
+                    <div className='top__resultCard cursorPointer background__effect__on__hover'>
+                        <img src={topResult?.image} alt={topResult?.artistName}/>
+                        <h3>{topResult?.artistName}</h3>
+                        <div className="top__result__playIcon">
+                        <h5>{topResult?.type}</h5>
+                        <PlayCircleFilledIcon/>
+                        </div>
+                    </div>
+                    
+                </div>}
+           
+            </div>
         </div>
-        <div>
-            <h3>Top Result</h3>
-            { (topResult) && <div>{topResult.artist}</div>}
-        </div>
-        </div>
-  )
+    )
 }
 
 export default SearchedItem

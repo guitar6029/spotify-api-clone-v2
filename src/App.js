@@ -44,6 +44,7 @@ function App() {
 
       });
 
+      
       // get and set user's playlists
       spotify.getUserPlaylists().then((playlists) => {
 
@@ -54,6 +55,7 @@ function App() {
 
       });
 
+    
         // user's top artists (favorite)
       spotify.getMyTopArtists().then(data => {
 

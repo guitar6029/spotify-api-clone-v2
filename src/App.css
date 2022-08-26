@@ -18,6 +18,20 @@ body {
 
 }
 
+.borderRadiusMedium{
+    border-radius: 10px;
+}
+
+.card__img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
 /* flex align center */
 .flex__alignItems__center{
     align-items: center;
@@ -41,6 +55,12 @@ body {
     object-fit: cover;
     width: 130px;
 }
+
+/* for the top result search */
+.section__card__top__result {
+    width: 300px;
+}
+
 /* sections card height sm , md, lg, xl */
 .section__card__height__sm {
     height: 200px;
@@ -96,6 +116,71 @@ body {
 
 }
 
+
+
 .text__center {
     text-align: center;
+}
+
+.top__resultCard {
+    display : flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.top__resultCard > h3 {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.top__result__playIcon > h5 {
+    grid-area: type;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    margin-top: 10px;
+    background-color: #121212;
+    width: 70px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.top__resultCard > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.top__resultCard > .top__result__playIcon > .MuiSvgIcon-root {
+    grid-area: playIcon;
+    justify-self: end;
+    display: none; 
+    color: var(--spotify-button-color);
+    margin-right: 5px;
+    font-size: 35px;
+}
+
+.top__resultCard:hover > .top__result__playIcon > .MuiSvgIcon-root {
+    display: block;
+} 
+
+.top__resultCard > .top__result__playIcon > .MuiSvgIcon-root:hover{
+    display: block;
+    transform: scale(1.3);
+    transition: color 0.1s ease-in;
+    color: var(--spotify-button-color-hover);
+}
+
+.top__result__playIcon {
+    display: grid;
+    grid-template-areas: 'type . . playIcon';
+    grid-template-columns: repeat(4, 1fr);
+    
+    
 }

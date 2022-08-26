@@ -26,6 +26,12 @@ function PlayerBar({ spotify }) {
      //display current playing track
     useEffect(() => {
         const displayCurrentTrack = () => {
+
+            //check if user currently playing anything,
+            //if playing get the current items desctiption
+            // and display it , otherwise return false and wait till something is playing
+            // 
+        //spotify.getMyCurrentPlaybackState().then(data => console.log(data));
             
             spotify.getMyCurrentPlayingTrack().then(data => {
                 // checks if currently playing

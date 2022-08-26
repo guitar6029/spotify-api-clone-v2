@@ -13,9 +13,36 @@
     
 }
 
-
 .search__type__item > h2 {
     font-size: 20px;
     padding: 10px;
     border-radius: 10px;
 }
+
+.selected {
+    background: #fff !important;
+    color: #000;
+}
+
+.searchResults{
+    margin-top: 40px;
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
+    /* align-content: space-around; */
+}
+
+.searchResults__top {
+    display: grid;
+    grid-template-columns: 4fr 4fr;
+    gap: 10px;
+}
+
+
+.top__result {
+    margin-top: 20px;
+    display:grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 1fr;
+} 
+
