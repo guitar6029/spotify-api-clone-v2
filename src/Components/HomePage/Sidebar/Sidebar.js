@@ -11,7 +11,7 @@ import uuid from 'react-uuid';
 
 function Sidebar() {
 
-    const [{playlists}, dispatch] = User();
+    const [{playlists}] = User();
 
 
   return (

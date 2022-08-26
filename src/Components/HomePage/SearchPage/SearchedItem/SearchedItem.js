@@ -6,17 +6,15 @@ import './SearchedItem.css';
 
 function SearchedItem({ spotify }) {
 
-    const [{ searchInput }] = User();
+    const [{ searchInput, artistID }, dispatch] = User();
     const [topResult, setTopResult] = useState({});
-    const [artistID, setArtistIDForTopTracks] =useState('');
+    //const [artistID, setArtistIDForTopTracks] =useState('');
 
     useEffect(() => {
-
-       spotify.searchTracks(`'artist:"${artistID}"'`).then( data => {console.log(data)}, (err) => {console.log(err)});
-       
+ 
          //top result for artist
         spotify.searchArtists(`'${searchInput}'`).then(data => {
-            console.log(data.artists.items[0]);
+            
             let _data = {
                 artistId: data.artists.items[0].id,
                 artistName: data.artists.items[0].name,
@@ -26,14 +24,21 @@ function SearchedItem({ spotify }) {
             }
 
             _data.type = _data.type.toUpperCase();
-            console.log(_data.artistID);
-            setArtistIDForTopTracks(_data.artistId);
-            console.log(_data);
-            setTopResult(_data);
+           
+            // dispatch({
+            //     type: 'SET_ARTIST_ID',
+            //     artistID : _data.artistId
+            // })
+                setTopResult(_data);
+
         }, (err) => { console.log(err) });
 
+        
+        // spotify.searchTracks(`artist:${artistID}`).then( data => {console.log(data)}, (err) => {console.log(err)});
+
+
          
-    }, [searchInput, spotify])
+    }, [searchInput, artistID, spotify, dispatch])
 
     return (
         <div className='main__content'>

@@ -5,7 +5,8 @@ export const initialState = {
     favoriteArtists: [],
     playing: false,
     item: null,
-    searchInput : null
+    searchInput : null,
+    artistID : null
 }
 
 const reducer = (state, action) => {
@@ -40,7 +41,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 searchInput : action.searchInput
-            }            
+            }
+        case 'SET_ARTIST_ID':
+            return {
+                ...state,
+                artistID : action.artistID
+            }
         default:
             return state;
     }
