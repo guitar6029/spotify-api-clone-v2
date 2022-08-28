@@ -1,0 +1,37 @@
+a{
+    text-decoration: none;
+}
+
+.flex__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.library__flex__content{
+    margin-left: 30px;
+    margin-top: 50px;
+
+}
+
+.library__flex__content > h3 {
+    font-size: 30px;
+}
+
+.library__categories{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.library__categories > div > a {
+    border-radius: 10px;
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+    background-color: #252222;
+    color: var(--spotify-text-color);
+    cursor: pointer;
+}
+

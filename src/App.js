@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import RedirectToHomePage from './RedirectToHomePage'; 
 import SearchPage from './Components/HomePage/SearchPage/SearchPage';
 import Library from './Components/UserLibrary/Library';
+import Playlists from './Components/UserLibrary/Playlists/Playlists';
+import Artists from './Components/UserLibrary/Artists/Artists';
+import Albums from './Components/UserLibrary/Albums/Albums';
 
 // creates an instance of 
 // spotify api for easier access to scopes
@@ -103,6 +106,9 @@ function App() {
       <Route path="/callback" element={<RedirectToHomePage />} />
       <Route path='/search' element={<SearchPage spotify={spotify} />} />
       <Route path='/user/library' element={<Library spotify={spotify} />} />
+      <Route path='/user/library/playlists' element={<Playlists spotify={spotify} />} />
+      <Route path='/user/library/artists' element={<Artists spotify={spotify} />} />
+      <Route path='/user/library/albums' element={<Albums spotify={spotify} />} />
       <Route path="*" element={<div>404 </div>} />
     </Routes> : <Login/>}
     

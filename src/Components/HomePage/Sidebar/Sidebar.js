@@ -20,7 +20,7 @@ function Sidebar() {
         <img className='sidebar__logo' src={sidebarLogo} alt='sidebar-spotify-logo'/>
         <SidebarOption text='Home' Icon={HomeIcon} linkTo="home" />
         {/* <SidebarOption text='Search' Icon={SearchIcon} linkTo="#"/> */}
-        <SidebarOption text='Your Library' Icon={ViewWeekIcon} linkTo="user/library"/>
+        <SidebarOption text='Your Library' Icon={ViewWeekIcon} linkTo="user/library/playlists"/>
         <SidebarOption text='Create Playlist' Icon={LibraryAddIcon} linkTo="user/create-playlist"/>
         <SidebarOption text='Liked Songs' Icon={FavoriteIcon}  linkTo="user/liked"/>
         <hr className='line'/>
