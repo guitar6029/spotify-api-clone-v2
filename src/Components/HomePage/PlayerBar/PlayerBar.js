@@ -22,13 +22,10 @@ function PlayerBar({ spotify }) {
   const [currentTrack, setCurrentTrackInfo] = useState([]);
   const [currentPodcast, setCurrentPodcastInfo] = useState([]);
 
-  //display current playing track
+  
   useEffect(() => {
     const displayCurrentTrack = () => {
-      //check if user currently playing anything,
-      //if playing get the current items desctiption
-      // and display it , otherwise return false and wait till something is playing
-      //
+      
       spotify.getMyCurrentPlaybackState().then(
         (data) => {
           console.log(data);
@@ -57,6 +54,7 @@ function PlayerBar({ spotify }) {
                 }
                 //if track is currently playing, get the track's info
                 else {
+                  
                   let _currentTrack = {
                     artist: data.item.artists[0].name,
                     album: data.item.album.name,
@@ -64,10 +62,10 @@ function PlayerBar({ spotify }) {
                     image: data.item.album.images[2].url,
                   };
 
-                  //console.log(_currentTrack);
+                  
                   setCurrentTrackInfo(_currentTrack);
                 }
-                //console.log(data);
+                
               },
               (err) => {
                 console.log(err);
@@ -170,8 +168,8 @@ function PlayerBar({ spotify }) {
       </div>
 
       <div className="playerBar__otherOptions">
-        <QueueMusicIcon />
-        <PhonelinkIcon />
+        {/* <QueueMusicIcon />
+        <PhonelinkIcon /> */}
         {/* <VolumeDownIcon/>
             <VolumeUpIcon/>
             <VolumeOffIcon/> */}

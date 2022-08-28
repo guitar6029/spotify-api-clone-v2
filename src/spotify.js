@@ -31,8 +31,8 @@ const spotifyScopes = [
     "user-read-private",
     "user-follow-read",
     "user-library-read",
-    "user-read-playback-state",
     "user-read-currently-playing",
+    "user-read-playback-state",
     "user-read-recently-played",
     "user-modify-playback-state",
     

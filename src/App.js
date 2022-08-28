@@ -43,6 +43,7 @@ function App() {
         });
       });
 
+  
       // get and set user's playlists
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({
@@ -69,6 +70,7 @@ function App() {
             randomArtist: randomArtist,
           });
 
+          
           dispatch({
             type: "SET_FAVORITE_ARTISTS",
             favoriteArtists: favoriteArtists,
@@ -79,7 +81,7 @@ function App() {
         }
       );
     }
-  }, []);
+  }, [token, dispatch]);
 
   return (
     <>

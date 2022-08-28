@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import uuid from 'react-uuid';
+import { User } from '../../../Context/UserContext';
 import PlayerBar from '../../HomePage/PlayerBar/PlayerBar'
 import Sidebar from '../../HomePage/Sidebar/Sidebar'
 import './Artists.css';
@@ -8,6 +10,7 @@ function Artists({spotify}) {
 
 
   const [myArtists, setMyArtists] = useState([]);
+  const [{favoriteArtists}, dispatch] = User();
 
   useEffect(()=>{
 
@@ -53,7 +56,18 @@ function Artists({spotify}) {
         
           <div className="library__flex__content">
           <h3>Artists</h3>
-          
+          <div className='section__flex__direction__column'>
+            {/* <div className='section__title'><h4>Favorite Artists</h4></div> */}
+            <div className='section__flex__direction__row'>{favoriteArtists?.map((artist) => {
+                return (
+                    <div key={uuid()} className="section__card background__effect__on__hover section__card__height__sm flex__alignItems__center text__center">
+                        <img className='margin__bottom' src={artist?.images[2].url} alt={artist?.artist} />
+                        <h5 className='textOverflow'>{artist?.artist}</h5>
+                    </div>
+                )
+            })}
+            </div>
+        </div>          
         </div>
 
         

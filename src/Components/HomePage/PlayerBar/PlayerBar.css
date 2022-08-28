@@ -68,8 +68,17 @@
 
 .playerBar__description__audio__description>span:nth-child(1) {
     font-size: 15px;
-    color: var(--spotify-color);
+    color: var(--spotify-color);;
+    overflow: hidden;
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+/* 
+.playerBar__description__audio__description>span:nth-child(1):hover{
+    transition: all 0.8s ease-in;
+    transform: translateX(100%);
+} */
 
 .playerBar__description__audio__description>span:nth-child(1):hover {
     text-decoration: underline;

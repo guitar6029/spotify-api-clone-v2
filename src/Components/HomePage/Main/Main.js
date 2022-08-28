@@ -11,8 +11,13 @@ function Main({ spotify }) {
 
   const [{randomArtist}] = User();
 
-  
-  console.log(randomArtist?.name);
+  useEffect(()=>{
+
+    
+    console.log('random artist : ' + randomArtist);
+    console.log(randomArtist?.artistID);
+    console.log(randomArtist?.artist);
+  }, []);
 
   return (
     <div className='main__content'>
@@ -20,7 +25,7 @@ function Main({ spotify }) {
       <Greeting/>
       <RecentlyPlayed spotify={spotify} />
       <FavoriteArtists/>
-      {/* <RecommendedArtists title="Mac DeMarco" spotify={spotify} similarTo="Marc DeMarco" /> */}
+      <RecommendedArtists title={randomArtist?.artist} spotify={spotify} artistID={randomArtist?.artistID} />
 
 
     </div>
