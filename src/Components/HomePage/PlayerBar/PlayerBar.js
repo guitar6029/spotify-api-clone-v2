@@ -1,154 +1,183 @@
-import { useEffect, useState } from 'react';
-import './PlayerBar.css';
-import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import ShuffleIcon from '@mui/icons-material/Shuffle';
-import RepeatIcon from '@mui/icons-material/Repeat';
-import QueueMusicIcon from '@mui/icons-material/QueueMusic';
-import PhonelinkIcon from '@mui/icons-material/Phonelink';
-import VolumeDownIcon from '@mui/icons-material/VolumeDown';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
+import { useEffect, useState } from "react";
+import "./PlayerBar.css";
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
+import PhonelinkIcon from "@mui/icons-material/Phonelink";
+import VolumeDownIcon from "@mui/icons-material/VolumeDown";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 
 function PlayerBar({ spotify }) {
+  const [likedItem, toggleLikedItem] = useState(false);
+  const [onPause, togglePausePlay] = useState(false);
+  const [onShuffle, toggleShuffle] = useState(false);
+  const [onRepeat, toggleRepeat] = useState(false);
+  const [currentTrack, setCurrentTrackInfo] = useState([]);
+  const [currentPodcast, setCurrentPodcastInfo] = useState([]);
 
-    const [likedItem, toggleLikedItem] = useState(false);
-    const [onPause, togglePausePlay] = useState(false);
-    const [onShuffle, toggleShuffle] = useState(false);
-    const [onRepeat, toggleRepeat] = useState(false);
-    const [currentTrack, setCurrentTrackInfo] = useState([]);
-    const [currentPodcast, setCurrentPodcastInfo] = useState([]);
-
-     //display current playing track
-    useEffect(() => {
-        const displayCurrentTrack = () => {
-
-            //check if user currently playing anything,
-            //if playing get the current items desctiption
-            // and display it , otherwise return false and wait till something is playing
-            // 
-        //spotify.getMyCurrentPlaybackState().then(data => console.log(data));
-            
-            spotify.getMyCurrentPlayingTrack().then(data => {
+  //display current playing track
+  useEffect(() => {
+    const displayCurrentTrack = () => {
+      //check if user currently playing anything,
+      //if playing get the current items desctiption
+      // and display it , otherwise return false and wait till something is playing
+      //
+      spotify.getMyCurrentPlaybackState().then(
+        (data) => {
+          console.log(data);
+          console.log(data.is_playing);
+          if (data.is_playing) {
+            spotify.getMyCurrentPlayingTrack().then(
+              (data) => {
                 // checks if currently playing
                 //console.log(data.is_playing);
                 if (data?.is_playing) {
-                    togglePausePlay(true)//change the play icon to pause
+                  togglePausePlay(true); //change the play icon to pause
                 }
 
                 if (!data?.is_playing) {
-                    togglePausePlay(false)
+                  togglePausePlay(false);
                 }
                 //if podcast is playing, the item will be null
                 if (data?.item === null) {
-                    //console.log('no info : null');
-                    let _currentTrack = {
-                        artist: null,
-                        album: null,
-                        images: null
-                    }
-                    setCurrentPodcastInfo(_currentTrack);
+                  //console.log('no info : null');
+                  let _currentTrack = {
+                    artist: null,
+                    album: null,
+                    images: null,
+                  };
+                  setCurrentPodcastInfo(_currentTrack);
                 }
-                //if track is currently playing, get the track's info 
+                //if track is currently playing, get the track's info
                 else {
-                    let _currentTrack = {
-                        artist: data.item.artists[0].name,
-                        album: data.item.album.name,
-                        trackName: data.item.name,
-                        image: data.item.album.images[2].url
-                    }
+                  let _currentTrack = {
+                    artist: data.item.artists[0].name,
+                    album: data.item.album.name,
+                    trackName: data.item.name,
+                    image: data.item.album.images[2].url,
+                  };
 
-                    //console.log(_currentTrack);                
-                    setCurrentTrackInfo(_currentTrack);
-
+                  //console.log(_currentTrack);
+                  setCurrentTrackInfo(_currentTrack);
                 }
                 //console.log(data);
-
-
-            }, (err) => { console.log(err) });
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          } else {
+            console.log("Nothing is currently playing");
+          }
+        },
+        (err) => {
+          console.log(err);
         }
-        displayCurrentTrack();
-    })
-     
+      );
+    };
+    displayCurrentTrack();
+  }, []);
 
-    //toggles the heart icon , like or unlike, toggles between two icons
-    const handleLikeClick = () => {
-        toggleLikedItem(previousState => !previousState);
+  //toggles the heart icon , like or unlike, toggles between two icons
+  const handleLikeClick = () => {
+    toggleLikedItem((previousState) => !previousState);
+  };
+
+  //skipToNext
+  const handleToNext = () => {
+    spotify.skipToNext();
+  };
+
+  //skipToPrevious
+  const handleToPrevious = () => {
+    spotify.skipToPrevious();
+  };
+
+  //toggles the play and pause icons
+  const handlePausePlay = () => {
+    //if onPaude is false, then play track, otherwise, pause
+    if (onPause) {
+      spotify.pause();
+      togglePausePlay((previousState) => !previousState);
+    } else {
+      spotify.play();
+      togglePausePlay((previousState) => !previousState);
     }
+  };
 
-    //skipToNext
-    const handleToNext = () => {
-        spotify.skipToNext();
-    }
+  //toggles between shuffle option
+  const handleShuffle = () => {
+    spotify.setShuffle();
+    toggleShuffle((previousState) => !previousState);
+  };
 
-    //skipToPrevious
-    const handleToPrevious = () => {
-        spotify.skipToPrevious();
-    }
+  //toggles repeat function of the audio
+  const handleRepeat = () => {
+    spotify.setRepeat();
+    toggleRepeat((previousState) => !previousState);
+  };
 
-    //toggles the play and pause icons
-    const handlePausePlay = () => {
-        //if onPaude is false, then play track, otherwise, pause
-        if (onPause) {
-            spotify.pause();
-            togglePausePlay(previousState => !previousState);
-        }
-        else {
-            spotify.play();
-            togglePausePlay(previousState => !previousState);
-        }
-    }
+  return (
+    <div className="playerBar">
+      <div className="playerBar__description">
+        <div>
+          <img src={currentTrack.image} alt="audio-album" />
+        </div>
+        <div className="playerBar__description__audio__description">
+          <span>{currentTrack.trackName}</span>
+          <span>{currentTrack.artist}</span>
+        </div>
+        {likedItem ? (
+          <div>
+            <FavoriteIcon className="liked__item" onClick={handleLikeClick} />
+          </div>
+        ) : (
+          <div>
+            <FavoriteBorderIcon onClick={handleLikeClick} />
+          </div>
+        )}
+      </div>
 
-    //toggles between shuffle option
-    const handleShuffle = () => {
-        spotify.setShuffle();
-        toggleShuffle(previousState => !previousState);
-    }
+      <div className="playerBar__controls">
+        {onShuffle ? (
+          <ShuffleIcon className="green" onClick={handleShuffle} />
+        ) : (
+          <ShuffleIcon onClick={handleShuffle} />
+        )}
 
-    //toggles repeat function of the audio
-    const handleRepeat = () => {
-        spotify.setRepeat();
-        toggleRepeat(previousState => !previousState);
-    }
+        <SkipPreviousIcon onClick={handleToPrevious} />
 
-    return (
-        <div className='playerBar'>
-            <div className='playerBar__description'>
-                <div><img src={currentTrack.image} alt="audio-album" /></div>
-                <div className='playerBar__description__audio__description'>
-                    <span>{currentTrack.trackName}</span><span>{currentTrack.artist}</span></div>
-                {(likedItem) ? <div><FavoriteIcon className='liked__item' onClick={handleLikeClick} /></div> : <div><FavoriteBorderIcon onClick={handleLikeClick} /></div>}
-            </div>
+        {onPause ? (
+          <PauseCircleFilledIcon className="green" onClick={handlePausePlay} />
+        ) : (
+          <PlayCircleFilledIcon onClick={handlePausePlay} />
+        )}
 
-            <div className='playerBar__controls'>
+        <SkipNextIcon onClick={handleToNext} />
 
-                {(onShuffle) ? <ShuffleIcon className="green" onClick={handleShuffle} /> :
-                    <ShuffleIcon onClick={handleShuffle} />}
+        {onRepeat ? (
+          <RepeatIcon className="green" onClick={handleRepeat} />
+        ) : (
+          <RepeatIcon onClick={handleRepeat} />
+        )}
+      </div>
 
-                <SkipPreviousIcon onClick={handleToPrevious} />
-
-                {(onPause) ? <PauseCircleFilledIcon className="green" onClick={handlePausePlay} /> : <PlayCircleFilledIcon onClick={handlePausePlay} />}
-
-                <SkipNextIcon onClick={handleToNext} />
-
-                {(onRepeat) ? <RepeatIcon className='green' onClick={handleRepeat} /> : <RepeatIcon onClick={handleRepeat} />}
-            </div>
-
-            <div className='playerBar__otherOptions'>
-                <QueueMusicIcon />
-                <PhonelinkIcon />
-                {/* <VolumeDownIcon/>
+      <div className="playerBar__otherOptions">
+        <QueueMusicIcon />
+        <PhonelinkIcon />
+        {/* <VolumeDownIcon/>
             <VolumeUpIcon/>
             <VolumeOffIcon/> */}
-
-            </div>
-
-        </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default PlayerBar
+export default PlayerBar;

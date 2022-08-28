@@ -15,6 +15,7 @@ a{
 
 .library__flex__content > h3 {
     font-size: 30px;
+    margin-bottom: 30px;
 }
 
 .library__categories{

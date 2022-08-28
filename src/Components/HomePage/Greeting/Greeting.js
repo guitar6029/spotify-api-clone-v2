@@ -30,7 +30,7 @@ function Greeting() {
 
     greeting()
 
-    })
+    }, [])
 
   return (
     <div className='greeting'>

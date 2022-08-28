@@ -3,3 +3,10 @@
     background-color: rgb(240, 234, 234) !important;
     color: #000;
 }
+
+.flex__row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
