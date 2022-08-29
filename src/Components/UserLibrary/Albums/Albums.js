@@ -2,41 +2,69 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PlayerBar from "../../HomePage/PlayerBar/PlayerBar";
 import Sidebar from "../../HomePage/Sidebar/Sidebar";
-import uuid from 'react-uuid';
+import uuid from "react-uuid";
 import "./Albums.css";
+import { User } from "../../../Context/UserContext";
+
+const DUMMY_DATA = [
+  {
+    artistID: '12345',
+    artist : 'example artists',
+    album: 'example album',
+    images : "some images"
+  }
+]
+
 
 function Albums({ spotify }) {
-
   
-  const [offsetNum, setOffset] = useState(0);
-  const [ myAlbums, setMyAlbums] = useState([]);
+  const [myAlbums, setMyAlbums] = useState(DUMMY_DATA);
+  const [{offset}, dispatch] = User();
+  
   useEffect(() => {
     
-    spotify.getMySavedAlbums({offset: offsetNum}).then(
-      (data) => { 
 
-          let _myAlbums = data.items.map(item => {
+    const fetchSavedAlbums = () => {
+
+      //spotify query limit is currently at 20, if data.next is not null
+      // the offset adds 20, which queries the next data set from the next api page, until data.next is null
+      spotify.getMySavedAlbums({ offset: offset }).then(
+        (data) => {
+          
+          let _myAlbums = data.items.map((item) => {
             return {
               artistID: item.album.artists[0].id,
-              album : item.album.name,
               artist: item.album.artists[0].name,
-              images: item.album.images
-            }
-  
+              album: item.album.name,
+              images: item.album.images,
+            };
           });
+  
+          setMyAlbums(previousData => {
+            return [...previousData, ..._myAlbums]
+          })
 
-          setMyAlbums(_myAlbums);
-        if(data.next !== null){
-          console.log('not empty');
-          //setOffset(previousNum => previousNum+1);
+          if(data.next !== null ){
+            dispatch({
+              type : "SET_OFFSET",
+              offset : offset + 20
+            });
+          }
+
+        },
+        (err) => {
+          console.log(err);
         }
-        
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }, []);
+      );
+
+    }
+
+    fetchSavedAlbums();
+
+    
+  }, [offset] );
+
+  console.log(myAlbums);
 
   return (
     <>
@@ -62,14 +90,21 @@ function Albums({ spotify }) {
           <div className="library__flex__content">
             <h3>Albums</h3>
             <div className="flex__row">
-            {myAlbums?.map((artist) => {
+              {myAlbums?.map((artist) => {
                 return (
-                    <div key={uuid()} className="section__card background__effect__on__hover section__card__height__sm flex__alignItems__center text__center">
-                        <img className='margin__bottom' src={artist?.images[1].url} alt={artist?.artist} />
-                        <h5 className='textOverflow'>{artist?.album}</h5>
-                    </div>
-                )
-            })}
+                  <div
+                    key={uuid()}
+                    className="section__card background__effect__on__hover section__card__height__sm flex__alignItems__center text__center"
+                  >
+                     <img
+                      className="margin__bottom"
+                      src={artist?.images[1].url}
+                      alt={artist?.artist}
+                    /> 
+                    <h5 className="textOverflow">{artist?.album}</h5>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

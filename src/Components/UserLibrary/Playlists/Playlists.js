@@ -12,7 +12,8 @@ function Playlists({spotify}) {
   const [myPlaylists, setMyPlaylists] = useState([]);
   
   useEffect(()=>{
-      spotify.getUserPlaylists().then(data => {
+      
+    spotify.getUserPlaylists().then(data => {
         
         let _myPlaylists = data.items.map(item => {
           return {
@@ -20,9 +21,12 @@ function Playlists({spotify}) {
             image : item.images[0].url
           }
         });
+      
         setMyPlaylists(_myPlaylists);
         //console.log(_myPlaylists);
+      
       });
+
   }, [])
 
   return (

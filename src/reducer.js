@@ -7,6 +7,7 @@ export const initialState = {
   trackItem: null,
   searchInput: null,
   artistID: null,
+  offset : 20,
 };
 
 const reducer = (state, action) => {
@@ -32,11 +33,6 @@ const reducer = (state, action) => {
         favoriteArtists: action.favoriteArtists,
       };
    
-    case "SET_RANDOM_ARTIST_FOR_SIMILAR_RECOMMENDATION":
-      return {
-        ...state,
-        randomArtist: action.randomArtist,
-      };
     case "SET_SEARCH_INPUT":
       return {
         ...state,
@@ -57,6 +53,11 @@ const reducer = (state, action) => {
         ...state,
         trackItem: action.item,
       };
+    case 'SET_OFFSET':
+      return{
+        ...state,
+        offset : action.offset,
+      }  
     default:
       return state;
   }

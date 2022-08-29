@@ -1,18 +1,17 @@
 import Login from "./Components/Login/Login";
 import { useEffect } from "react";
-import "./App.css";
 import { tokenResponseUrl } from "./spotify";
 import SpotifyWebApi from "spotify-web-api-js";
 import HomePage from "./Components/HomePage/HomePage";
 import { User } from "./Context/UserContext";
 import { Routes, Route, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import RedirectToHomePage from "./RedirectToHomePage";
 import SearchPage from "./Components/HomePage/SearchPage/SearchPage";
 import Library from "./Components/UserLibrary/Library";
 import Playlists from "./Components/UserLibrary/Playlists/Playlists";
 import Artists from "./Components/UserLibrary/Artists/Artists";
 import Albums from "./Components/UserLibrary/Albums/Albums";
+import "./App.css";
 
 // creates an instance of
 // spotify api for easier access to scopes
@@ -20,7 +19,6 @@ const spotify = new SpotifyWebApi();
 
 function App() {
   const [{ user, token }, dispatch] = User();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const hash = tokenResponseUrl();
@@ -28,6 +26,7 @@ function App() {
     const _token = hash.access_token;
 
     if (_token) {
+      
       dispatch({
         type: "SET_TOKEN",
         token: _token,
@@ -44,6 +43,7 @@ function App() {
       });
 
   
+
       // get and set user's playlists
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({
@@ -62,14 +62,6 @@ function App() {
               images: item.images,
             };
           });
-
-          const randomNum = Math.floor(Math.random() * favoriteArtists.length);
-          const randomArtist = favoriteArtists[randomNum];
-          dispatch({
-            type: "SET_RANDOM_ARTIST_FOR_SIMILAR_RECOMMENDATION",
-            randomArtist: randomArtist,
-          });
-
           
           dispatch({
             type: "SET_FAVORITE_ARTISTS",
