@@ -24,12 +24,12 @@ function PlayerBar({ spotify }) {
 
   
   useEffect(() => {
+
     const displayCurrentTrack = () => {
       
       spotify.getMyCurrentPlaybackState().then(
         (data) => {
-          console.log(data);
-          console.log(data.is_playing);
+          
           if (data.is_playing) {
             spotify.getMyCurrentPlayingTrack().then(
               (data) => {
@@ -81,7 +81,8 @@ function PlayerBar({ spotify }) {
       );
     };
     displayCurrentTrack();
-  }, []);
+
+  }, [currentTrack, spotify]);
 
   //toggles the heart icon , like or unlike, toggles between two icons
   const handleLikeClick = () => {
@@ -121,6 +122,13 @@ function PlayerBar({ spotify }) {
     spotify.setRepeat();
     toggleRepeat((previousState) => !previousState);
   };
+
+  //handles volume
+  const handleVolumeDrag = (e) => {
+    console.log(e.target.value);
+    const myVolume = Number(e.target.value); 
+    spotify.setVolume(myVolume);
+  }
 
   return (
     <div className="playerBar">
@@ -168,6 +176,7 @@ function PlayerBar({ spotify }) {
       </div>
 
       <div className="playerBar__otherOptions">
+        <input type="range" step="2" min="0" max="100" onChange={handleVolumeDrag}/>
         {/* <QueueMusicIcon />
         <PhonelinkIcon /> */}
         {/* <VolumeDownIcon/>

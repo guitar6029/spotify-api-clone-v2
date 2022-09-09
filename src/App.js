@@ -26,7 +26,6 @@ function App() {
     const _token = hash.access_token;
 
     if (_token) {
-      
       dispatch({
         type: "SET_TOKEN",
         token: _token,
@@ -42,7 +41,6 @@ function App() {
         });
       });
 
-  
 
       // get and set user's playlists
       spotify.getUserPlaylists().then((playlists) => {
@@ -51,6 +49,8 @@ function App() {
           playlists: playlists,
         });
       });
+
+    
 
       // user's top artists (favorite)
       spotify.getMyTopArtists().then(
@@ -62,7 +62,7 @@ function App() {
               images: item.images,
             };
           });
-          
+
           dispatch({
             type: "SET_FAVORITE_ARTISTS",
             favoriteArtists: favoriteArtists,
