@@ -27,7 +27,7 @@ function Sidebar() {
 
         {playlists?.items?.map( (playlist) => (
           
-            <SidebarOption key={uuid()} text={playlist.name} />
+            <SidebarOption key={uuid()} text={playlist.name} id={playlist.id} />
         ))}
         
 
