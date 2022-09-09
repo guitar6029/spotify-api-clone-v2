@@ -133,9 +133,9 @@ function PlayerBar({ spotify }) {
   return (
     <div className="playerBar">
       <div className="playerBar__description">
-        <div>
-          <img src={currentTrack.image} alt="audio-album" />
-        </div>
+        {(currentTrack.image) ? <div>
+          <img src={currentTrack?.image} alt="audio-album" />
+        </div>: <div></div>}
         <div className="playerBar__description__audio__description">
           <span>{currentTrack.trackName}</span>
           <span>{currentTrack.artist}</span>
