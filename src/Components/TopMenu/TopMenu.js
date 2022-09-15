@@ -8,6 +8,7 @@ import "./TopMenu.css";
 function TopMenu({ spotify }) {
   const [{ user }, dispatch] = User();
   const [userInput, setUserInput] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
   // useEffect(()=>{
@@ -26,6 +27,7 @@ function TopMenu({ spotify }) {
 
   // takes user's input and the input value is used for the search query
   const handleInput = (e) => {
+    //e.preventDefault();
     //setInputSearchValue(e.target.value);
     const _userInput = e.target.value;
     //setUserInput(_userInput);

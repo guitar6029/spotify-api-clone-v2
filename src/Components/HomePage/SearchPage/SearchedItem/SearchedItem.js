@@ -37,8 +37,8 @@ function SearchedItem({ spotify }) {
         // spotify.searchTracks(`artist:${artistID}`).then( data => {console.log(data)}, (err) => {console.log(err)});
 
 
-         
-    }, [searchInput, artistID, spotify, dispatch])
+       //[searchInput, artistID, spotify, dispatch]  
+    }, []);
 
     return (
         <div className='main__content'>
