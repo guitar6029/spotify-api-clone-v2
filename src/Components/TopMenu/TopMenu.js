@@ -19,15 +19,14 @@ function TopMenu({ spotify }) {
   // }, [userInput])
 
   //returns search query from the user's input
-  const handleSearch = () => {
+  const handleSearch = (e) => {
     //spotify.searchTracks(`${inputSearchValue}`).then(data => {console.log(data)}, (err) => console.log(err));
-
+    e.preventDefault();
     navigate("/search");
   };
 
   // takes user's input and the input value is used for the search query
   const handleInput = (e) => {
-    //e.preventDefault();
     //setInputSearchValue(e.target.value);
     const _userInput = e.target.value;
     //setUserInput(_userInput);
