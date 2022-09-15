@@ -6,10 +6,17 @@
     margin-top: 10px;
     margin-bottom: 7px;
     color: var(--spotify-text-color);
+    transition: 0.2s ease-in;
 }
 
 .sidebar__option > a {
     color: var(--spotify-text-color);
+    transition: 0.2s ease-in;
+}
+
+
+.sidebar__option > a:hover{
+    color: var(--spotify-color); 
 }
 
 .sidebar__option:hover {
