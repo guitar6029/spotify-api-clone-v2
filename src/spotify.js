@@ -18,7 +18,7 @@
 const spotifyAuthEndPoint = "https://accounts.spotify.com/authorize";
 
 //redirects back to our home page
-const redirectUri = "http://localhost:3000/callback";
+const redirectUri = "https://spotify-api-clone-alpha.vercel.app/callback";
 
 //for api id and token
 const client_id = "5c336d5ba3d0480b849dd26ea9b2aba9";
