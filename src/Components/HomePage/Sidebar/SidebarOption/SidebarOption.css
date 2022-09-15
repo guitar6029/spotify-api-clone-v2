@@ -8,6 +8,10 @@
     color: var(--spotify-text-color);
 }
 
+.sidebar__option > a {
+    color: var(--spotify-text-color);
+}
+
 .sidebar__option:hover {
     color: var(--spotify-color);
     cursor: pointer;
