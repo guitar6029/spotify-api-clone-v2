@@ -1,7 +1,6 @@
-########################
-SPOTIFY API V2
-######################
-This one actually uses the spotify api,
-so the user could sign in, and the profile's music library will be available to the user, such as saved playlists.
+React | Spotify Api
 
-Vercel will host the app.
+![image](https://github.com/user-attachments/assets/db2ff6b6-b492-4c42-8178-5bdce1bf81d3)
+
+
+Hosted by Vercel
