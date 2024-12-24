@@ -14,7 +14,7 @@ function FavoriteArtists() {
                 return (
                     <div key={uuid()} className="section__card background__effect__on__hover section__card__height__sm flex__alignItems__center text__center">
                         <img className='margin__bottom' src={artist?.images[2].url} alt={artist?.artist} />
-                        <h5 className='textOverflow'>{artist?.artist}</h5>
+                        <h5 className='textOverflow'>{artist?.artist} </h5>
                     </div>
                 )
             })}
